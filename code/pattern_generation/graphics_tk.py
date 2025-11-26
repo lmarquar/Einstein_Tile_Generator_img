@@ -86,8 +86,7 @@ def draw_tiles(tiles, width=500, height=500, scalar=20, filename="./einstein_pat
             img.draw_polygon(tile[0], fill=tile[1][1])
 
         img.save(filename)
-        return filename
-    elif show_window:
+    if show_window:
         root = Tk()
         canvas = EinsteinCanvas(root, width=width, height=height)
         canvas.set_scalar(scalar)
@@ -97,4 +96,4 @@ def draw_tiles(tiles, width=500, height=500, scalar=20, filename="./einstein_pat
 
         canvas.pack()
         root.mainloop()
-        return None
+    return filename

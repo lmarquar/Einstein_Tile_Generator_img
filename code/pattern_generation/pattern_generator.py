@@ -3,10 +3,10 @@ from graphics_tk import *
 from PIL import ImageColor
 
 to_screen_mat = [1, 0, 0, 0, -1, 0]
-col = ["black", "seagreen", "White", "sandybrown", "sandybrown"]
-
-colors = {'H1': [col[0], ImageColor.getrgb(col[0])], 'H': [col[1], ImageColor.getrgb(col[1])], 'T': [
-    col[2], ImageColor.getrgb(col[2])], 'P': [col[3], ImageColor.getrgb(col[3])], 'F': [col[4], ImageColor.getrgb(col[4])]}
+# col = ["black", "seagreen", "White", "sandybrown", "sandybrown"]
+#
+# colors = {'H1': [col[0], ImageColor.getrgb(col[0])], 'H': [col[1], ImageColor.getrgb(col[1])], 'T': [
+#    col[2], ImageColor.getrgb(col[2])], 'P': [col[3], ImageColor.getrgb(col[3])], 'F': [col[4], ImageColor.getrgb(col[4])]}
 
 vertices_to_draw = []
 
@@ -28,7 +28,7 @@ class HatTile:
     def __init__(self, label):
         self.label = label
 
-    def draw(self, S, level):
+    def draw(self, S, level, colors):
         draw_polygon(hat_outline, S, colors[self.label])
 
 
@@ -44,10 +44,10 @@ class MetaTile:
     def eval_child(self, n, i):
         return mat_vec_mul(self.children[n].T, self.children[n].geom.shape[i])
 
-    def draw(self, S, level):
+    def draw(self, S, level, colors):
         if level > 0:
             for child in self.children:
-                child.geom.draw(mat_mul(S, child.T), level - 1)
+                child.geom.draw(mat_mul(S, child.T), level - 1, colors)
         else:
             draw_polygon(self.shape, S, "white")
 
@@ -267,14 +267,20 @@ def build_supertiles():
     level += 1
 
 
-def draw():
+def draw(colors):
     global level
     global tiles
-
-    # for tile in tiles:
-    tiles[0].draw(to_screen_mat, level)
+    tiles[0].draw(to_screen_mat, level, colors)
 
 
-def next_generation():
-    draw()
+def next_generation(colorquintett=["black", "seagreen", "White", "sandybrown", "sandybrown"]):
+    col = colorquintett
+    colors = {
+        'H1': [col[0], ImageColor.getrgb(col[0])],
+        'H': [col[1], ImageColor.getrgb(col[1])],
+        'T': [col[2], ImageColor.getrgb(col[2])],
+        'P': [col[3], ImageColor.getrgb(col[3])],
+        'F': [col[4], ImageColor.getrgb(col[4])]
+    }
+    draw(colors)
     build_supertiles()
