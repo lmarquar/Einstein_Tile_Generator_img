@@ -1,3 +1,9 @@
+# Edits
+  - i do only one final showcase, where the tileamount~ITERATIONS, the Tilesize~SCALAR. Coloring~COLORQUINTETT. This way we can hopefully control everything from the main call.
+  - in the draw tile call you can now set output file and the optional OG-Project window.
+  - cleaned up some Warnings
+
+  
 # Einstein Tile Generator
 ![Einstein Pattern](pattern_image.png)
 
