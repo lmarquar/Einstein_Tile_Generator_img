@@ -1,8 +1,13 @@
 from pattern_generator import *
-from graphics_tk import *
+from graphics_tk import draw_tiles
 
-SCALAR = 30
+SCALAR = 10
+ITERATIONS = 5
 
-while True:
+for i in range(ITERATIONS):
     next_generation()
-    draw_tiles(vertices_to_draw, width=1000, height=1000, scalar=SCALAR)
+
+s = draw_tiles(vertices_to_draw, width=1000, height=1000,
+               scalar=SCALAR)
+
+print(s)
